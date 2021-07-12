@@ -218,7 +218,7 @@ public class FrameMovimento {
 				
 				String placa;
 				
-				placa = textPlacaSaida.getText();
+				placa = textPlacaSaida.getText().toUpperCase();
 				MovimentoDao dao = new MovimentoDao();
 				Movimento movimento = dao.buscarMovimento(placa);
 				

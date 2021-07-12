@@ -103,21 +103,21 @@ public class MovimentoDao {
 			BufferedReader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"));
 
 			String linha = reader.readLine();
-			Movimento cliente = new Movimento();
+			Movimento movimento = new Movimento();
 
 			while (linha != null) {
 				String[] vetorMovimento = linha.split(";");
 
-				if (vetorMovimento[1].equals(cliente.getPlaca())) {
-					cliente.setCodigo(vetorMovimento[0]);
-					cliente.setPlaca(vetorMovimento[1]);
-					cliente.setModelo(vetorMovimento[2]);
-					cliente.setDataEntrada(vetorMovimento[3]);
-					cliente.setHoraEntrada(vetorMovimento[4]);
-					cliente.setDataSaida(vetorMovimento[5]);
-					cliente.setHoraSaida(vetorMovimento[6]);
-					cliente.setTempo(Integer.parseInt(vetorMovimento[7]));
-					cliente.setValorTotal(Double.parseDouble(vetorMovimento[8]));
+				if (vetorMovimento[1].equals(placa)) {
+					movimento.setCodigo(vetorMovimento[0]);
+					movimento.setPlaca(vetorMovimento[1]);
+					movimento.setModelo(vetorMovimento[2]);
+					movimento.setDataEntrada(vetorMovimento[3]);
+					movimento.setHoraEntrada(vetorMovimento[4]);
+					movimento.setDataSaida(vetorMovimento[5]);
+					movimento.setHoraSaida(vetorMovimento[6]);
+					movimento.setTempo(Integer.parseInt(vetorMovimento[7]));
+					movimento.setValorTotal(Double.parseDouble(vetorMovimento[8]));
 					
 					break;
 				}
@@ -127,7 +127,7 @@ public class MovimentoDao {
 
 			reader.close();
 
-			return cliente;
+			return movimento;
 
 		} catch (Exception e) {
 			System.out.println("Ocorreu um erro na tentativa de buscar o cliente");
