@@ -22,13 +22,13 @@ import br.com.estacionamento.dao.MovimentoDao;
 import br.com.estacionamento.model.Movimento;
 
 public class FrameMovimento {
-	
-	private JLabel labelEntrada; 
+
+	private JLabel labelEntrada;
 	private JLabel labelPlacaEntrada;
 	private JTextField textPlacaEntrada;
 	private JLabel labelModeloEntrada;
 	private JTextField textModeloEntrada;
-	private JButton buttonEntrar; 
+	private JButton buttonEntrar;
 	private JScrollPane scrollTable;
 	private JTable tabelaClientes;
 	private DefaultTableModel tabelaClientesModelo;
@@ -52,111 +52,111 @@ public class FrameMovimento {
 	private JTextField textValor;
 	private JButton buttonSaida;
 	private JButton buttonFecharSistema;
-	
+
 	public void criarTela() {
-		
+
 		JFrame tela = new JFrame();
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tela.setTitle("Registro de entrada e saída de veículos");
 		tela.setSize(740, 610);
 		tela.setResizable(false);
 		tela.setLayout(null);
-		
+
 		Font titulo = new Font("Arial", Font.BOLD, 20);
-		
+
 		labelEntrada = new JLabel("ENTRADA");
-		labelEntrada.setBounds(30, 15, 100, 30); 
-		//x-margin left, y- margin top, l- largura, h-altura
+		labelEntrada.setBounds(30, 15, 100, 30);
+		// x-margin left, y- margin top, l- largura, h-altura
 		labelEntrada.setFont(titulo);
 		labelEntrada.setForeground(Color.GREEN);
-		
+
 		labelPlacaEntrada = new JLabel("PLACA:");
 		labelPlacaEntrada.setBounds(30, 50, 100, 20);
-		
+
 		textPlacaEntrada = new JTextField();
 		textPlacaEntrada.setBounds(20, 80, 270, 30);
-		
+
 		labelModeloEntrada = new JLabel("MODELO:");
 		labelModeloEntrada.setBounds(320, 50, 100, 20);
-		
+
 		textModeloEntrada = new JTextField();
 		textModeloEntrada.setBounds(310, 80, 270, 30);
-		
+
 		buttonEntrar = new JButton("ENTRAR");
 		buttonEntrar.setBounds(600, 80, 100, 30);
 		buttonEntrar.setBackground(Color.BLUE);
 		buttonEntrar.setForeground(Color.WHITE);
-		
+
 		labelSaida = new JLabel("SAÍDA");
 		labelSaida.setFont(titulo);
 		labelSaida.setBounds(30, 280, 100, 30);
 		labelSaida.setForeground(Color.GREEN);
-		
+
 		labelPlacaSaida = new JLabel("PLACA:");
 		labelPlacaSaida.setBounds(30, 315, 100, 20);
-		
+
 		textPlacaSaida = new JTextField();
 		textPlacaSaida.setBounds(20, 345, 115, 30);
-		
+
 		buttonBuscar = new JButton("BUSCAR");
 		buttonBuscar.setBounds(145, 345, 100, 30);
 		buttonBuscar.setBackground(Color.BLUE);
 		buttonBuscar.setForeground(Color.WHITE);
-		
+
 		labelModeloSaida = new JLabel("MODELO:");
 		labelModeloSaida.setBounds(30, 385, 100, 20);
-		
+
 		textModeloSaida = new JTextField();
 		textModeloSaida.setBounds(20, 415, 115, 30);
-		
+
 		labelDataEntrada = new JLabel("DATA ENTRADA:");
 		labelDataEntrada.setBounds(155, 385, 100, 20);
-		
+
 		textDataEntrada = new JTextField();
 		textDataEntrada.setBounds(145, 415, 115, 30);
-		
+
 		labelHoraEntrada = new JLabel("HORA ENTRADA:");
 		labelHoraEntrada.setBounds(280, 385, 100, 20);
-		
+
 		textHoraEntrada = new JTextField();
 		textHoraEntrada.setBounds(270, 415, 115, 30);
-		
+
 		labelDataSaida = new JLabel("DATA SAÍDA:");
 		labelDataSaida.setBounds(405, 385, 100, 20);
-		
+
 		textDataSaida = new JTextField();
 		textDataSaida.setBounds(395, 415, 115, 30);
-		
+
 		labelHoraSaida = new JLabel("HORA SAÍDA:");
 		labelHoraSaida.setBounds(530, 385, 100, 20);
-		
+
 		textHoraSaida = new JTextField();
 		textHoraSaida.setBounds(520, 415, 115, 30);
-		
+
 		labelTempo = new JLabel("TEMPO:");
 		labelTempo.setBounds(655, 385, 100, 20);
-		
+
 		textTempo = new JTextField();
 		textTempo.setBounds(645, 415, 65, 30);
-		
+
 		labelValor = new JLabel("VALOR A PAGAR:");
 		labelValor.setBounds(30, 490, 110, 20);
-		
+
 		textValor = new JTextField();
 		textValor.setBounds(150, 475, 170, 50);
-		
+
 		buttonSaida = new JButton("EFETUAR SAÍDA");
 		buttonSaida.setBounds(345, 475, 170, 50);
 		buttonSaida.setBackground(Color.BLUE);
 		buttonSaida.setForeground(Color.WHITE);
-		
+
 		buttonFecharSistema = new JButton("FECHAR SISTEMA");
 		buttonFecharSistema.setBounds(540, 475, 170, 50);
 		buttonFecharSistema.setBackground(Color.RED);
 		buttonFecharSistema.setForeground(Color.WHITE);
-		
+
 		criarTabela();
-		
+
 		tela.getContentPane().add(labelEntrada);
 		tela.getContentPane().add(labelPlacaEntrada);
 		tela.getContentPane().add(textPlacaEntrada);
@@ -184,102 +184,121 @@ public class FrameMovimento {
 		tela.getContentPane().add(textValor);
 		tela.getContentPane().add(buttonSaida);
 		tela.getContentPane().add(buttonFecharSistema);
-		
+
 		tela.setVisible(true);
-		
+
 		buttonEntrar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Movimento cliente = new Movimento();
-				cliente.setCodigo(br.com.estacionamento.util.Util.gerarCodigo());
-				cliente.setPlaca(textPlacaEntrada.getText().trim().toUpperCase());
-				cliente.setModelo(textModeloEntrada.getText().trim().toUpperCase());
-				cliente.setDataEntrada(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-				cliente.setHoraEntrada(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
-				cliente.setDataSaida("");
-				cliente.setHoraSaida("");
-				cliente.setTempo(0);
-				cliente.setValorTotal(0);
-				
-				MovimentoDao dao = new MovimentoDao(cliente);
-				dao.entrarCliente();
-				
-				JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+
+				if (validarFormulario()) {
+
+					Movimento movimento = new Movimento();
+					movimento.setCodigo(br.com.estacionamento.util.Util.gerarCodigo());
+					movimento.setPlaca(textPlacaEntrada.getText().trim().toUpperCase());
+					movimento.setModelo(textModeloEntrada.getText().trim().toUpperCase());
+					movimento.setDataEntrada(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+					movimento.setHoraEntrada(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+					movimento.setDataSaida("");
+					movimento.setHoraSaida("");
+					movimento.setTempo("");
+					movimento.setValorTotal(0);
+
+					MovimentoDao dao = new MovimentoDao(movimento);
+					dao.entrarCliente();
+
+					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!", "Atenção!",
+							JOptionPane.WARNING_MESSAGE);
+				}
 
 			}
 		});
-		
+
 		buttonBuscar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String placa;
-				
+
 				placa = textPlacaSaida.getText().toUpperCase();
 				MovimentoDao dao = new MovimentoDao();
 				Movimento movimento = dao.buscarMovimento(placa);
-				
+
 				movimento.setDataSaida(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
 				movimento.setHoraSaida(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")).toString());
-				
+				movimento.setTempo("");
+
 				textModeloSaida.setText(movimento.getModelo());
 				textDataEntrada.setText(movimento.getDataEntrada());
 				textHoraEntrada.setText(movimento.getHoraEntrada());
 				textDataSaida.setText(movimento.getDataSaida());
 				textHoraSaida.setText(movimento.getHoraSaida());
-				
-				
+				textTempo.setText(movimento.getTempo());
+
 			}
 		});
-		
+
 		buttonFecharSistema.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				tela.setVisible(false);
 				tela.dispose();
-				
+
 			}
 		});
-		
+
 	}
-	
+
 	private void criarTabela() {
-		
+
 		tabelaClientesModelo = new DefaultTableModel();
-		
+
 		tabelaClientesModelo.addColumn("CÓDIGO");
 		tabelaClientesModelo.addColumn("PLACA");
 		tabelaClientesModelo.addColumn("MODELO");
 		tabelaClientesModelo.addColumn("DATA ENTRADA");
-		
+
 		MovimentoDao movimentoDao = new MovimentoDao();
 		ArrayList<Movimento> movimentos = movimentoDao.listarMovimentos();
-		
+
 		for (Movimento movimento : movimentos) {
-			String[] vetorMovimento = {movimento.getCodigo(), movimento.getPlaca(), movimento.getModelo(), movimento.getDataEntrada()};
+			String[] vetorMovimento = { movimento.getCodigo(), movimento.getPlaca(), movimento.getModelo(),
+					movimento.getDataEntrada() };
 			tabelaClientesModelo.addRow(vetorMovimento);
 		}
-		
-		
+
 		tabelaClientes = new JTable(tabelaClientesModelo);
-		
+
 		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(170);
 		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(170);
 		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(170);
 		tabelaClientes.getColumnModel().getColumn(3).setPreferredWidth(170);
-		
-		
+
 		tabelaClientes.getTableHeader().setReorderingAllowed(false);
-		
 
 		scrollTable = new JScrollPane(tabelaClientes);
 		scrollTable.setBounds(20, 120, 680, 150);
 	}
-	
-	
+
+	protected boolean validarFormulario() {
+
+		boolean valido = true;
+
+		if (textPlacaEntrada.getText().trim().length() == 0) {
+			labelPlacaEntrada.setForeground(Color.RED);
+			valido = false;
+		} else if (textModeloEntrada.getText().trim().length() == 0) {
+			labelModeloEntrada.setForeground(Color.RED);
+			valido = false;
+		}
+
+		return valido;
+
+	}
 }

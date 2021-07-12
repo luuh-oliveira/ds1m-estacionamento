@@ -7,22 +7,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import br.com.estacionamento.model.Movimento;
 
 public class MovimentoDao {
 
-	private Movimento cliente;
+	private Movimento movimento;
 
 	private static final String LOCAL_ARQUIVO = "C:/Users/Luiza/movimentacao.ds1";
 
-	public Movimento getCliente() {
-		return cliente;
+	public Movimento getMovimento() {
+		return movimento;
 	}
 
-	public MovimentoDao(Movimento cliente) {
-		this.cliente = cliente;
+	public MovimentoDao(Movimento movimento) {
+		this.movimento = movimento;
 	}
 
 	// construtor vazio
@@ -39,7 +41,7 @@ public class MovimentoDao {
 			BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"), StandardOpenOption.WRITE,
 					StandardOpenOption.APPEND);
 
-			writer.write(cliente.toString());
+			writer.write(movimento.toString());
 			writer.newLine();
 			writer.close();
 
@@ -71,7 +73,7 @@ public class MovimentoDao {
 				movimento.setHoraEntrada(vetorMovimento[4]);
 				movimento.setDataSaida(vetorMovimento[5]);
 				movimento.setHoraSaida(vetorMovimento[6]);
-				movimento.setTempo(Integer.parseInt(vetorMovimento[7]));
+				movimento.setTempo(vetorMovimento[7]);
 				movimento.setValorTotal(Double.parseDouble(vetorMovimento[8]));
 
 				movimentos.add(movimento);
@@ -116,7 +118,7 @@ public class MovimentoDao {
 					movimento.setHoraEntrada(vetorMovimento[4]);
 					movimento.setDataSaida(vetorMovimento[5]);
 					movimento.setHoraSaida(vetorMovimento[6]);
-					movimento.setTempo(Integer.parseInt(vetorMovimento[7]));
+					movimento.setTempo(vetorMovimento[7]);
 					movimento.setValorTotal(Double.parseDouble(vetorMovimento[8]));
 					
 					break;
@@ -138,6 +140,17 @@ public class MovimentoDao {
 
 	}
 	
-	
+	public String calcularTempo() {
+		
+		Movimento movimento = new Movimento();
+		
+		LocalTime tempoEntrada = LocalTime.parse(movimento.getHoraEntrada());
+		LocalTime tempoSaida = LocalTime.parse(movimento.getHoraSaida());
+		
+		Duration tempo = Duration.between(tempoEntrada, tempoSaida);
+		
+		return tempo.toString();
+		
+	}
 
 }

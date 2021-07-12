@@ -9,7 +9,7 @@ public class Movimento {
 	private String horaEntrada;
 	private String dataSaida;
 	private String horaSaida;
-	private int tempo;
+	private String tempo;
 	private double valorTotal;
 	
 
@@ -69,11 +69,11 @@ public class Movimento {
 		this.horaSaida = horaSaida;
 	}
 
-	public int getTempo() {
+	public String getTempo() {
 		return tempo;
 	}
 
-	public void setTempo(int tempo) {
+	public void setTempo(String tempo) {
 		this.tempo = tempo;
 	}
 
